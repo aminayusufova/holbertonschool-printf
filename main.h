@@ -20,10 +20,6 @@ typedef struct Set
 } set;
 
 int _printf(const char*, ...);
-int print_d(va_list list);
-int print_rot13(va_list list);
-int print_rev(va_list list);
-int print_str(va_list list);
-int print_char(va_list list);
+
 
 #endif
