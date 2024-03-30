@@ -15,7 +15,6 @@ int print_str(va_list list)
 
 	 if (s == NULL)
 	 {	 
-	 write("");
          return (-1); 
 	 }
 		 
