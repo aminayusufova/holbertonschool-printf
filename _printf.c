@@ -34,7 +34,7 @@ int _printf(const char *format, ...)
                 count += write(1, &format[i], 1);
                 break;
             }
-             else if (format[i + 1] != '%')
+            else if (format[i + 1] != '%')
             {
                 for (j = 0; j < 4; j++)
                 {
@@ -46,18 +46,15 @@ int _printf(const char *format, ...)
                     }
                 }
 
-            if (j == 4)
-            {
-                if (format[i + 1] == '%')
+                if (j == 4)
                 {
                     count += write(1, "%", 1);
-                    i++;
                 }
-                else 
-                {
-                    count += write(1, &format[i], 1);
-                  
-                }
+            }
+            else
+            {
+                count += write(1, "%", 1);
+                i++;
             }
         }
         else
