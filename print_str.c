@@ -11,7 +11,7 @@ int print_str(va_list list)
 	int count;
 	
 
-	char *s = va_arg(list, char*)
+	char *s = va_arg(list, char*);
 
 	if (s == NULL)
    	 {
