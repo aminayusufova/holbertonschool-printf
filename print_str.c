@@ -11,15 +11,17 @@ int print_str(va_list list)
 	int count;
 	char *s;
 
-	int i = 0;
 	s = va_arg(list, char*);
-	if (s == NULL)
-		s = "(null)";
-	while (s[i] != '\0')
+
+	if (*s == '\0')
+		return (0);
+
+	count = 0;
+
+	while (*s)
 	{
-		_putchar(s[i]);
-		i++;
-		count++;
+		count += write(1, s, 1);
+		s++;
 	}
 
 	return (count);
