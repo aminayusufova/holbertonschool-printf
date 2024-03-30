@@ -13,16 +13,16 @@ int print_str(va_list list)
 
 	s = va_arg(list, char*);
 
-	if (*s == '\0')
-		return (0);
+	 if (s == NULL)
+        return (-1); 
 
-	count = 0;
-
-	while (*s)
-	{
-		count += write(1, s, 1);
-		s++;
-	}
+    while (*s)
+    {
+        if (write(1, s, 1) == -1)
+            return (-1); 
+        count++;
+        s++;
+    }
 
 	return (count);
 }
