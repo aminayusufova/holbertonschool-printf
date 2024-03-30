@@ -13,11 +13,11 @@ int print_str(va_list list)
 
 	i = 0;
 	str = va_arg(args, char*);
-	if (str == NULL)
-		str = "(null)";
-	while (str[i] != '\0')
+	if (s == NULL)
+		s = "(null)";
+	while (s[i] != '\0')
 	{
-		_putchar(str[i]);
+		_putchar(s[i]);
 		i++;
 		count++;
 	}
