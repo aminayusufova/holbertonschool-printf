@@ -14,8 +14,11 @@ int print_str(va_list list)
 	s = va_arg(list, char*);
 
 	 if (s == NULL)
-        return (-1); 
-
+	 {	 
+	 write("");
+         return (-1); 
+	 }
+		 
     while (*s)
     {
         if (write(1, s, 1) == -1)
