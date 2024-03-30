@@ -47,7 +47,8 @@ int _printf(const char *format, ...)
                 }
                 if (j == 4)
                 {
-                    count += write(1, "%", 1);
+                    count += write(1, "%", 2);
+                    i++;
                 }
             }
             else
