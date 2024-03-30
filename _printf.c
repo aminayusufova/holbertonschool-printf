@@ -34,15 +34,17 @@ int _printf(const char *format, ...)
                 count += write(1, &format[i], 1);
                 break;
             }
-            for (j = 0; j < 4; j++)
+             else if (format[i + 1] != '%')
             {
-                if (format[i + 1] == arguments[j].spec)
+                for (j = 0; j < 4; j++)
                 {
-                    count += arguments[j].print(list);
-                    i++;
-                    break;
+                    if (format[i + 1] == arguments[j].spec)
+                    {
+                        count += arguments[j].print(list);
+                        i++;
+                        break;
+                    }
                 }
-            }
 
             if (j == 4)
             {
