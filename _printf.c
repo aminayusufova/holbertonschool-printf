@@ -36,14 +36,14 @@ int _printf(const char *format, ...)
             }
             else if (format[i + 1] == '%') {
             count += write(1, "%", 1);
-            i++; // Skip the next '%'
+            i++;
             }
             else 
             {
             for (j = 0; j < 4; j++) {
                 if (format[i + 1] == arguments[j].spec) {
                     count += arguments[j].print(list);
-                    i++; // Skip the format specifier
+                    i++;
                     break;
                 }
             }
