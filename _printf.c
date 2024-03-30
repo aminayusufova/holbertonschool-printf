@@ -50,7 +50,6 @@ int _printf(const char *format, ...)
                 {
                     count += write(1, "%", 1);
                     i++;
-                    count++;
                 }
                 else 
                 {
