@@ -30,8 +30,10 @@ int _printf(const char *format, ...)
         if (format[i] == '%')
         {
             if (format[i + 1] == '\0')
+            {
+                count += write(1, &format[i], 1);
                 return count;
-
+            }
             for (j = 0; j < 4; j++)
             {
                 if (format[i + 1] == arguments[j].spec)
