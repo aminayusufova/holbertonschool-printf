@@ -11,20 +11,16 @@ int print_str(va_list list)
 	int count;
 	char *s;
 
-	s = va_arg(list, char*);
-
-	 if (s == NULL)
-	 {	 
-         return (-1); 
-	 }
-		 
-    while (*s)
-    {
-        if (write(1, s, 1) == -1)
-            return (-1); 
-        count++;
-        s++;
-    }
+	i = 0;
+	str = va_arg(args, char*);
+	if (str == NULL)
+		str = "(null)";
+	while (str[i] != '\0')
+	{
+		_putchar(str[i]);
+		i++;
+		count++;
+	}
 
 	return (count);
 }
