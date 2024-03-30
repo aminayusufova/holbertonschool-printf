@@ -32,7 +32,7 @@ int _printf(const char *format, ...)
             if (format[i + 1] == '\0')
             {
                 count += write(1, &format[i], 1);
-                return count;
+                break;
             }
             for (j = 0; j < 4; j++)
             {
