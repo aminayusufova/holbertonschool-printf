@@ -25,42 +25,37 @@ int _printf(const char *format, ...)
     va_start(list, format);
     count = 0;
 
-    for (i = 0; format[i]; i++)
+    while (*format != '\0')
     {
-        if (format[i] == '%')
+        if (*format != '%')
         {
-            if (format[i + 1] == '\0')
-            {
-                count += write(1, &format[i], 1);
-                break;
-            }
-              else if (format[i + 1] != '%')
-            {
-                for (j = 0; j < 4; j++)
-                {
-                    if (format[i + 1] == arguments[j].spec)
-                    {
-                        count += arguments[j].print(list);
-                        i++;
-                        break;
-                    }
-                }
-                if (j == 4)
-                {
-                    count += write(1, "%", 1);
-                }
-            }
-            else
-            {
-                count += write(1, "%", 1);
-                i++;
-            }
+            write(1, format, 1);
+            count++;
         }
         else
         {
-            write(1, &format[i], 1);
-            count++;
+            switch (*++format)
+            {
+            case 'd':
+                count += fprintf(1, "%d", va_arg(args, int));
+                break;
+            case 'c':
+                count += fprintf(1, "%c", va_arg(args, int));
+                break;
+            case 's':
+                count += fprintf(1, "%s", va_arg(args, char *));
+                break;
+            case 'f':
+                count += fprintf(1, "%f", va_arg(args, double));
+                break;
+            default:
+                write(1, "%", 1);
+                write(1, format, 1);
+                count += 2;
+                break;
+            }
         }
+        format++;
     }
     va_end(list);
     return (count);
