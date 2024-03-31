@@ -31,7 +31,6 @@ int _printf(const char *format, ...)
         {
             if (format[i + 1] == '\0')
             {
-                count += write(1, &format[i], 1);
                 break;
             }
             else if (format[i + 1] == '%')
@@ -54,7 +53,6 @@ int _printf(const char *format, ...)
                 }
                 if (!found)
                 {
-                    count += write(1, &format[i], 2);
                     i++;
                 }
             }
