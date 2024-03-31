@@ -25,7 +25,7 @@ int _printf(const char *format, ...)
     va_start(list, format);
     count = 0;
 
-   for (i = 0; format[i]; i++)
+    for (i = 0; format[i]; i++)
     {
         if (format[i] == '%')
         {
@@ -34,7 +34,7 @@ int _printf(const char *format, ...)
                 count += write(1, &format[i], 1);
                 break;
             }
-            else if (format[i + 1] != '%')
+              else if (format[i + 1] != '%')
             {
                 for (j = 0; j < 4; j++)
                 {
@@ -52,6 +52,7 @@ int _printf(const char *format, ...)
             }
             else
             {
+                count += write(1, "%", 1);
                 i++;
             }
         }
