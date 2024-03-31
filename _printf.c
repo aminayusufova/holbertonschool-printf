@@ -58,7 +58,8 @@ int _printf(const char *format, ...)
         }
         else
         {
-            count += write(1, &format[i], 1);
+            write(1, &format[i], 1);
+            count++;
         }
     }
     va_end(list);
