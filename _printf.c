@@ -53,7 +53,7 @@ int _printf(const char *format, ...)
                 }
                 if (!found)
                 {
-                    i++;
+                    continue;
                 }
             }
         }
