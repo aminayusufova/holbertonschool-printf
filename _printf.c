@@ -1,62 +1,78 @@
-#include <stdarg.h>
-#include <unistd.h>
-#include "main.h"
-
+#include "holberton.h"
 /**
- * _printf - printf function
+ * _printf - printf function.
+ * @format: variable
  *
- * @format: formatted string
- * Return:   total number of outputted characters
+ * Return: nbytes printed.
  */
 int _printf(const char *format, ...)
 {
-    int i, j, count;
-    va_list list;
-    set arguments[] = {
-        {'c', print_char},
-        {'d', print_d},
-        {'i', print_d},
-        {'s', print_str},
-    };
+	va_list list;
+	unsigned int i = 0, characters_number = 0;
 
-    if (format == NULL)
-        return (-1);
+	if (!format)
+		return (-1);
 
-    va_start(list, format);
-    count = 0;
+	va_start(list, format);
+	for (i = 0; format[i] != '\0'; i++)
+	{
+		if (format[i] == '%')
+		{
+			if (format[i + 1] == '\0')
+				return (-1);
 
-    while (*format != '\0')
-    {
-        if (*format != '%')
-        {
-            write(1, format, 1);
-            count++;
-        }
-        else
-        {
-            switch (*++format)
-            {
-            case 'd':
-                count += fprintf(1, "%d", va_arg(args, int));
-                break;
-            case 'c':
-                count += fprintf(1, "%c", va_arg(args, int));
-                break;
-            case 's':
-                count += fprintf(1, "%s", va_arg(args, char *));
-                break;
-            case 'f':
-                count += fprintf(1, "%f", va_arg(args, double));
-                break;
-            default:
-                write(1, "%", 1);
-                write(1, format, 1);
-                count += 2;
-                break;
-            }
-        }
-        format++;
-    }
-    va_end(list);
-    return (count);
+			else if (format[i + 1] == '%')
+			{
+				_putchar('%');
+				characters_number++;
+				i++;
+			}
+			else if (cmp_func(format[i + 1]) != NULL)
+			{
+				characters_number += (cmp_func(format[i + 1]))(list);
+				i++;
+			}
+			else
+			{
+				_putchar(format[i]);
+				characters_number++;
+			}
+		}
+		else
+		{
+			_putchar(format[i]);
+			characters_number++;
+		}
+	}
+	va_end(list);
+	return (characters_number);
+}
+
+/**
+ * cmp_func - Entry point
+ * @a: character.
+ *
+ * Return: 0.
+ */
+int (*cmp_func(const char a))(va_list)
+{
+	print_f printf[] = {
+		{'c', printc},
+		{'s', print_string},
+		{'d', print_n},
+		{'i', print_n},
+		{'\0', NULL}
+	};
+
+	int k;
+
+	for (k = 0; printf[k].p != '\0'; k++)
+	{
+		if (printf[k].p == a)
+		{
+			return (printf[k].func);
+		}
+	}
+
+	return (0);
 }
