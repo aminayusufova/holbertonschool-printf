@@ -25,36 +25,34 @@ int _printf(const char *format, ...)
     va_start(list, format);
     count = 0;
 
-    for (i = 0; format[i]; i++)
+   for (i = 0; format[i]; i++)
     {
         if (format[i] == '%')
         {
             if (format[i + 1] == '\0')
             {
+                count += write(1, &format[i], 1);
                 break;
             }
-            else if (format[i + 1] == '%')
+            else if (format[i + 1] != '%')
             {
-                count += write(1, "%", 1);
-                i++;
-            }
-            else
-            {
-                int found = 0;
                 for (j = 0; j < 4; j++)
                 {
                     if (format[i + 1] == arguments[j].spec)
                     {
                         count += arguments[j].print(list);
                         i++;
-                        found = 1;
                         break;
                     }
                 }
-                if (!found)
+                if (j == 4)
                 {
-                    continue;
+                    count += write(1, "%", 1);
                 }
+            }
+            else
+            {
+                i++;
             }
         }
         else
